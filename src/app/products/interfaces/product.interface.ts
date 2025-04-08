@@ -7,3 +7,8 @@ export interface Product {
   rating: { rate: number; count: number };
   title: string;
 }
+
+export interface ProductItemCart {
+  product: Product;
+  quantity: number;
+}
