@@ -19,5 +19,14 @@
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 line-clamp-3">
       {{ product().description }}
     </p>
+
+    <!-- <div class="flex justify-end my-2"> -->
+    <button
+      class="bg-blue-600 px-6 py-2 rounded-md cursor-pointer"
+      (click)="add($event)"
+    >
+      Añadir al carrito
+    </button>
+    <!-- </div> -->
   </div>
 </div>
