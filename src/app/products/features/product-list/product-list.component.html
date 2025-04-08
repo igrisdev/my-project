@@ -1,6 +1,19 @@
-<p>product-list works!</p>
-
-{{ productsState.state().status }}
-@for (product of productsState.state().products; track product) {
-<p>{{ product.title }}</p>
-}
+<div class="mx-auto max-w-screen-xl">
+  @if (productsState.state.status() === "loading") {
+  <p>Loading...</p>
+  } @else {
+  <div class="flex justify-end my-6">
+    <button
+      type="button"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+    >
+      Cambiar pagina
+    </button>
+  </div>
+  <div class="grid grid-cols-4 gap-4">
+    @for (product of productsState.state().products; track product) {
+    <app-product-card [product]="product" />
+    }
+  </div>
+  }
+</div>
