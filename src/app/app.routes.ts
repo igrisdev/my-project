@@ -12,6 +12,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'products',
+    redirectTo: '',
   },
 ];

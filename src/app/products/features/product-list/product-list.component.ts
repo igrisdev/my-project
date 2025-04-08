@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ProductsStateService } from '../../data-access/products-state.services';
 import { ProductCardComponent } from '../../ui/product-card/product-card.component';
 import { Product } from '../../interfaces/product.interface';
-import { CartStateService } from '../../../shared/data-access/cart-state.servie';
+import { CartStateService } from '../../../shared/data-access/cart-state.service';
 
 @Component({
   selector: 'app-product-list',
