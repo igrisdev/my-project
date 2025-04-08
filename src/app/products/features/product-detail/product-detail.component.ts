@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
+import { ProductsDetailStateService } from '../../data-access/products-detail-state.services';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product-detail.component.html',
-  styles: ``
+  providers: [ProductsDetailStateService],
 })
-export class ProductDetailComponent {
+export default class ProductDetailComponent {
+  productDetailState = inject(ProductsDetailStateService).state;
 
+  id = input.required<number>();
+
+  constructor() {
+    effect(() => {
+      this.productDetailState.getById(this.id());
+    });
+  }
 }
