@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-product-card',
   imports: [],
   templateUrl: './product-card.component.html',
-  styles: ``
+  styles: ``,
 })
 export class ProductCardComponent {
-
+  product = input.required<Product>();
 }
