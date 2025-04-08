@@ -6,6 +6,6 @@ import { Product } from '../interfaces/product.interface';
 @Injectable()
 export class ProductsService extends BaseHttpService {
   getProducts(): Observable<Product[]> {
-    return this.http.get<any>(`${this.apiUrl}/products`);
+    return this.http.get<any[]>(`${this.apiUrl}/products`);
   }
 }
