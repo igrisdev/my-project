@@ -1,1 +1,6 @@
-<p class="text-white">product-list works!</p>
+<p>product-list works!</p>
+
+{{ productsState.state().status }}
+@for (product of productsState.state().products; track product) {
+<p>{{ product.title }}</p>
+}
