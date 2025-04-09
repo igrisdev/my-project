@@ -2,7 +2,7 @@ import { inject, Injectable, Signal } from '@angular/core';
 import { ProductItemCart } from '../../products/interfaces/product.interface';
 import { signalSlice } from 'ngxtension/signal-slice';
 import { StorageService } from './storage.service';
-import { map, Observable } from 'rxjs';
+import { count, map, Observable } from 'rxjs';
 
 interface State {
   products: ProductItemCart[];
@@ -27,9 +27,23 @@ export class CartStateService {
   state = signalSlice({
     initialState: this.initialState,
     sources: [this.loadProducts$],
+    selectors: (state) => ({
+      count: () =>
+        state().products.reduce((acc, product) => acc + product.quantity, 0),
+      price: () => {
+        return state().products.reduce(
+          (acc, product) => acc + product.product.price * product.quantity,
+          0
+        );
+      },
+    }),
     actionSources: {
       add: (state, action$: Observable<ProductItemCart>) =>
         action$.pipe(map((product) => this.add(state, product))),
+      remove: (state, actions: Observable<number>) =>
+        actions.pipe(map((id) => this.remove(state, id))),
+      update: (state, actions: Observable<ProductItemCart>) =>
+        actions.pipe(map((product) => this.update(state, product))),
     },
     effects: (state) => ({
       load: () => {
@@ -55,6 +69,26 @@ export class CartStateService {
     isInCart.quantity++;
     return {
       products: [...state().products],
+    };
+  }
+
+  private remove(state: Signal<State>, id: number) {
+    return {
+      products: state().products.filter((product) => product.product.id !== id),
+    };
+  }
+
+  private update(state: Signal<State>, product: ProductItemCart) {
+    const products = state().products.map((productInCart) => {
+      if (productInCart.product.id === product.product.id) {
+        return { ...productInCart, quantity: product.quantity };
+      }
+
+      return productInCart;
+    });
+
+    return {
+      products,
     };
   }
 }
