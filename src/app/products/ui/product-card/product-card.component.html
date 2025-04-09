@@ -11,7 +11,7 @@
   <div class="p-5">
     <a [routerLink]="['/product', product().id]">
       <h5
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1"
+        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1 hover:underline"
       >
         {{ product().title }}
       </h5>
@@ -20,13 +20,11 @@
       {{ product().description }}
     </p>
 
-    <!-- <div class="flex justify-end my-2"> -->
     <button
       class="bg-blue-600 px-6 py-2 rounded-md cursor-pointer"
       (click)="add($event)"
     >
       Añadir al carrito
     </button>
-    <!-- </div> -->
   </div>
 </div>
